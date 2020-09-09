@@ -99,7 +99,7 @@ EventTimeline.prototype.initialiseState = function(stateEvents) {
     // timeline) and possibly the sender (which seems like it should never be
     // reset but in practice causes a lot of the tests to break).
     for (const e of stateEvents) {
-      if (!e.isBeingDecrypted()){
+      if (!e.isBeingDecrypted()) {
         Object.freeze(e);
       }
     }
@@ -397,4 +397,3 @@ EventTimeline.prototype.removeEvent = function(eventId) {
 EventTimeline.prototype.toString = function() {
     return this._name;
 };
-
