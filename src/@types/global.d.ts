@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// this is needed to tell TS about global.Olm
+import * as Olm from "olm"; // eslint-disable-line @typescript-eslint/no-unused-vars
+
 export {};
 
 declare global {

@@ -247,7 +247,7 @@ export class SecretStorage extends EventEmitter {
         ) {
             const hasKey = await this.hasKey(keys[0]);
             if (hasKey) {
-                console.log("Fixing up passthrough secret: " + name);
+                logger.log("Fixing up passthrough secret: " + name);
                 await this.storePassthrough(name, keys[0]);
                 const newData = await this._baseApis.getAccountDataFromServer(name);
                 return newData;
@@ -373,6 +373,7 @@ export class SecretStorage extends EventEmitter {
         const requestId = this._baseApis.makeTxnId();
 
         const requestControl = this._requests[requestId] = {
+            name,
             devices,
         };
         const promise = new Promise((resolve, reject) => {
@@ -536,6 +537,10 @@ export class SecretStorage extends EventEmitter {
                 return;
             }
 
+            logger.log(
+                `Successfully received secret ${requestControl.name} ` +
+                `from ${deviceInfo.deviceId}`,
+            );
             requestControl.resolve(content.secret);
         }
     }
